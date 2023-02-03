@@ -1,36 +1,35 @@
 import { useUser } from '@auth0/nextjs-auth0'
 import Layout from '../components/layout'
+import SearchBar from '../components/searchbar'
+import { useState, useEffect } from 'react'
 
-const Home = () => {
+export function getServerSideProps() {
+  return {
+      props: { message: process.env.EDAMAM_APP_ID },
+  };
+}
+
+type ProcessProps = {
+  key: String
+}
+
+const Home = ({ key }: ProcessProps) => {
   const { user, isLoading } = useUser()
+
+  const handleChange = (input:string) => {
+    console.log(key)
+  }
 
   return (
     <Layout user={user} loading={isLoading}>
-      <h1>Next.js and Auth0 Example</h1>
+      <h1>Foodies</h1>
+      <p>Looking for a recipe? Try searching for one from the search field below!</p>
 
-      {isLoading && <p>Loading login info...</p>}
+      <SearchBar
+        change={handleChange}
+      />
 
-      {!isLoading && !user && (
-        <>
-          <p>
-            To test the login click in <i>Login</i>
-          </p>
-          <p>
-            Once you have logged in you should be able to navigate between
-            protected routes: client rendered, server rendered profile pages,
-            and <i>Logout</i>
-          </p>
-        </>
-      )}
 
-      {user && (
-        <>
-          <h4>Rendered user info on the client</h4>
-          <img src={user.picture} alt="user picture" />
-          <p>nickname: {user.nickname}</p>
-          <p>name: {user.name}</p>
-        </>
-      )}
     </Layout>
   )
 }
