@@ -8,10 +8,9 @@ type ListProps = {
 };
 
 const FoodList = ({ data }: ListProps) => {
-  console.log(data);
   return (
     <>
-      {data ? (
+      {data && data.count > 0 ? (
         <Grid
           sx={{marginTop: "0px !important"}}
           container
@@ -27,7 +26,7 @@ const FoodList = ({ data }: ListProps) => {
           })}
         </Grid>
       ) : (
-        <></>
+        <>No results.</>
       )}
     </>
   );

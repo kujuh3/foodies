@@ -5,23 +5,30 @@ import { useState, useEffect } from "react";
 
 type SearchFieldProps = {
   change: Function;
+  defaultWord?: string;
 };
 
-const SearchBar = ({ change }: SearchFieldProps) => {
+const SearchBar = ({ change, defaultWord }: SearchFieldProps) => {
   const [input, setInput] = useState("");
+  const [firstLoad, setFirstload] = useState(true);
   //Since this search bar will be used for fetches, we'll set a timeout of 600ms so that we don't do fetches every damn nanosecond.
   useEffect(() => {
-    const timeout = setTimeout(() => {
-      change(input);
-    }, 600);
-    return () => {
-      clearTimeout(timeout);
-    };
+    if (!firstLoad) {
+      const timeout = setTimeout(() => {
+        change(input);
+      }, 600);
+      return () => {
+        clearTimeout(timeout);
+      };
+    } else {
+      setFirstload(!firstLoad);
+    }
   }, [input]);
 
   return (
     <>
       <TextField
+        defaultValue={defaultWord ? defaultWord : null}
         onChange={(e) => {
           setInput(e.target.value);
         }}
