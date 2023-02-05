@@ -1,3 +1,12 @@
+# TS/Auth0 test with Next.js
+This repository will be updated heavily during the next 3 months.
+The main idea is to get a hold on TypeScript for Futurice.
+
+Final product will help you with few things:
+ - What can I make with what's in my closet
+ - Post my own recipes
+ - Can't pick what to eat - pls help
+
 # Next.js and Auth0 Example
 
 This example shows how you can use `@auth0/nextjs-auth` to easily add authentication support to your Next.js application. It tries to cover a few topics:
