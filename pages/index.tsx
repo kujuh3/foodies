@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import FoodList from "../components/foodlist";
 import { useState, useEffect } from "react";
 import randomFood from "../components/randomfoods";
+import CircularProgress from "@mui/material/CircularProgress";
 
 type ProcessProps = {
   data: Object;
@@ -12,32 +13,36 @@ type ProcessProps = {
 
 const Home = ({ data }: ProcessProps) => {
   const { user, isLoading } = useUser();
+  const [searching, setSearching] = useState(true);
   const router = useRouter();
   const [foodlist, setFoodlist] = useState();
   const defaultSearch = randomFood();
 
   const handleChange = (input: string) => {
-    ;(async () => {
+    setSearching(true);
+    (async () => {
       const res = await fetch(`/api/edamam`, {
         method: "POST",
-        body: JSON.stringify({qstring: input}),
-      })
-      const data = await res.json()
-      setFoodlist(data)
-    })()
+        body: JSON.stringify({ qstring: input }),
+      });
+      const data = await res.json();
+      setSearching(false);
+      setFoodlist(data);
+    })();
   };
- 
+
   //For first time load boilerplate search
   useEffect(() => {
-    ;(async () => {
+    (async () => {
       const res = await fetch(`/api/edamam`, {
         method: "POST",
-        body: JSON.stringify({qstring: defaultSearch}),
-      })
-      const data = await res.json()
-      setFoodlist(data)
-    })()
-  }, [])
+        body: JSON.stringify({ qstring: defaultSearch }),
+      });
+      const data = await res.json();
+      setSearching(false);
+      setFoodlist(data);
+    })();
+  }, []);
 
   return (
     <Layout user={user} loading={isLoading}>
@@ -47,7 +52,13 @@ const Home = ({ data }: ProcessProps) => {
       </p>
 
       <SearchBar defaultWord={defaultSearch} change={handleChange} />
-      <FoodList data={foodlist} />
+      {searching ? (
+        <div style={{textAlign: "center", marginTop: "10px"}}>
+          <CircularProgress sx={{ color: "#ffa700"}} />
+        </div>
+      ) : (
+        <FoodList data={foodlist} />
+      )}
     </Layout>
   );
 };

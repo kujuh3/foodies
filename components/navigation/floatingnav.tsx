@@ -1,8 +1,10 @@
 import React from 'react'
 
-type Props = {}
+type NavProps = {
+    itemCount: Number;
+}
 
-function FloatingNavigation({}: Props) {
+function FloatingNavigation({}: NavProps) {
   return (
     <div>floatingnav</div>
   )
