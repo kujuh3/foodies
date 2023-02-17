@@ -7,6 +7,7 @@ type ProfileProps = {
 }
 
 export default function Profile({ user }: ProfileProps) {
+  console.log(user)
   return (
     <Layout user={user}>
       <h1>Profile</h1>

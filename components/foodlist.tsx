@@ -8,6 +8,7 @@ type ListProps = {
 };
 
 const FoodList = ({ data }: ListProps) => {
+  console.log(data)
   return (
     <>
       {data && data.count > 0 ? (

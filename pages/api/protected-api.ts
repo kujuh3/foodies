@@ -5,7 +5,7 @@ import { withApiAuthRequired, getSession } from '@auth0/nextjs-auth0'
 
 async function handle(req, res) {
   const { user } = getSession(req, res)
-
+  console.log(user)
   try {
     res.status(200).json({
       session: 'true',

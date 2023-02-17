@@ -31,7 +31,7 @@ const Header = ({ user, loading }: HeaderProps) => {
                 </Link>
               </li>
               <li>
-                <Link href="/getrecipe" legacyBehavior>
+                <Link href="/recipe" legacyBehavior>
                   <a>test</a>
                 </Link>
               </li>
