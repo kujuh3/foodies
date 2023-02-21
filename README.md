@@ -1,11 +1,7 @@
 # TS/Auth0 test with Next.js
-This repository will be updated heavily during the next 3 months.
 The main idea is to get a hold on TypeScript for Futurice.
 
-Final product will help you with few things:
- - What can I make with what's in my closet
- - Post my own recipes
- - Can't pick what to eat - pls help
+Find recipes and add them to favorites - on hold for now
 
 # Next.js and Auth0 Example
 
